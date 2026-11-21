@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cloud Security Posture Report</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 24px; }
+    h1, h2 { color: #1f2937; }
+    table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+    th, td { border: 1px solid #d1d5db; padding: 8px; text-align: left; }
+    th { background-color: #f3f4f6; }
+    .table-wrap { max-height: 700px; overflow: auto; border: 1px solid #d1d5db; margin-bottom: 20px; }
+    .table-wrap table { margin-bottom: 0; border: 0; }
+    .table-wrap thead th { position: sticky; top: 0; z-index: 2; }
+    td { word-break: break-word; }
+    .meta { color: #374151; margin-bottom: 10px; }
+    .warning { color: #92400e; font-weight: bold; }
+    .Critical { color: #991b1b; font-weight: bold; }
+    .High { color: #b45309; font-weight: bold; }
+    .Medium { color: #1d4ed8; font-weight: bold; }
+    .Low { color: #374151; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h1>Cloud Security Posture Report</h1>
+
+  <h2>Summary by Severity</h2>
+  <table>
+    <tr><th>Severity</th><th>Count</th></tr>
+    
+    <tr>
+      <td class="Critical">Critical</td>
+      <td>0</td>
+    </tr>
+    
+    <tr>
+      <td class="High">High</td>
+      <td>0</td>
+    </tr>
+    
+    <tr>
+      <td class="Medium">Medium</td>
+      <td>0</td>
+    </tr>
+    
+    <tr>
+      <td class="Low">Low</td>
+      <td>4</td>
+    </tr>
+    
+  </table>
+
+  <h2>Summary by Service</h2>
+  <table>
+    <tr><th>Service</th><th>Count</th></tr>
+    
+    <tr>
+      <td>CloudTrail</td>
+      <td>1</td>
+    </tr>
+    
+    <tr>
+      <td>EC2</td>
+      <td>1</td>
+    </tr>
+    
+    <tr>
+      <td>IAM</td>
+      <td>1</td>
+    </tr>
+    
+    <tr>
+      <td>S3</td>
+      <td>1</td>
+    </tr>
+    
+  </table>
+
+  <h2>Findings</h2>
+  <p class="meta">Displaying 4 of 4 findings in HTML.</p>
+  
+  <div class="table-wrap">
+  <table>
+    <tr>
+      <th>Service</th>
+      <th>Resource ID</th>
+      <th>Issue</th>
+      <th>Severity</th>
+      <th>Recommendation</th>
+      <th>CIS Control ID</th>
+    </tr>
+    
+    <tr>
+      <td>CloudTrail</td>
+      <td>account</td>
+      <td>Unable to list CloudTrail trails.</td>
+      <td class="Low">Low</td>
+      <td>Ensure cloudtrail:DescribeTrails permission is granted.</td>
+      <td>CIS-2.0</td>
+    </tr>
+    
+    <tr>
+      <td>EC2</td>
+      <td>account</td>
+      <td>Unable to list EC2 instances.</td>
+      <td class="Low">Low</td>
+      <td>Ensure ec2:DescribeInstances permission is granted.</td>
+      <td>CIS-5.0</td>
+    </tr>
+    
+    <tr>
+      <td>IAM</td>
+      <td>account</td>
+      <td>Unable to list IAM resources.</td>
+      <td class="Low">Low</td>
+      <td>Ensure scanner has IAM list permissions.</td>
+      <td>CIS-1.0</td>
+    </tr>
+    
+    <tr>
+      <td>S3</td>
+      <td>account</td>
+      <td>Unable to list S3 buckets.</td>
+      <td class="Low">Low</td>
+      <td>Verify s3:ListAllMyBuckets permission for scanner identity.</td>
+      <td>CIS-3.0</td>
+    </tr>
+    
+  </table>
+  </div>
+
+  <h2>Recommendations</h2>
+  <ul>
+    
+    <li>Ensure cloudtrail:DescribeTrails permission is granted.</li>
+    
+    <li>Ensure ec2:DescribeInstances permission is granted.</li>
+    
+    <li>Ensure scanner has IAM list permissions.</li>
+    
+    <li>Verify s3:ListAllMyBuckets permission for scanner identity.</li>
+    
+  </ul>
+
+  <h2>CIS Controls Covered</h2>
+  <ul>
+    
+    <li>CIS-1.0</li>
+    
+    <li>CIS-2.0</li>
+    
+    <li>CIS-3.0</li>
+    
+    <li>CIS-5.0</li>
+    
+  </ul>
+</body>
+</html>

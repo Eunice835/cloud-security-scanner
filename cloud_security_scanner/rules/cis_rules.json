@@ -1,0 +1,353 @@
+{
+  "rules": {
+    "s3_public_access": {
+      "issue": "S3 bucket is publicly accessible.",
+      "severity": "Critical",
+      "recommendation": "Enable S3 Block Public Access and remove public ACL/policy permissions.",
+      "cis_control_id": "CIS-3.1"
+    },
+    "s3_encryption_disabled": {
+      "issue": "S3 bucket encryption is not enabled.",
+      "severity": "High",
+      "recommendation": "Enable default encryption (SSE-S3 or SSE-KMS) on the bucket.",
+      "cis_control_id": "CIS-3.2"
+    },
+    "unable_validate_s3_public": {
+      "issue": "Unable to validate S3 public access.",
+      "severity": "Low",
+      "recommendation": "Review bucket ACL/policy permissions and scanner IAM permissions.",
+      "cis_control_id": "CIS-3.1"
+    },
+    "unable_validate_s3_encryption": {
+      "issue": "Unable to validate S3 encryption.",
+      "severity": "Low",
+      "recommendation": "Review scanner IAM permissions for encryption checks.",
+      "cis_control_id": "CIS-3.2"
+    },
+    "unable_validate_s3_list": {
+      "issue": "Unable to list S3 buckets.",
+      "severity": "Low",
+      "recommendation": "Verify s3:ListAllMyBuckets permission for scanner identity.",
+      "cis_control_id": "CIS-3.0"
+    },
+    "iam_over_permissive": {
+      "issue": "IAM principal has over-permissive policy.",
+      "severity": "High",
+      "recommendation": "Apply least privilege and remove wildcard action/resource permissions.",
+      "cis_control_id": "CIS-1.1"
+    },
+    "iam_inactive_credentials": {
+      "issue": "IAM user has inactive credentials.",
+      "severity": "Medium",
+      "recommendation": "Remove inactive credentials and rotate active credentials regularly.",
+      "cis_control_id": "CIS-1.4"
+    },
+    "unable_validate_iam_permissions": {
+      "issue": "Unable to validate IAM permissions.",
+      "severity": "Low",
+      "recommendation": "Review iam:Get* and iam:List* permissions for scanner identity.",
+      "cis_control_id": "CIS-1.0"
+    },
+    "unable_validate_iam_credentials": {
+      "issue": "Unable to validate IAM credentials.",
+      "severity": "Low",
+      "recommendation": "Ensure iam:ListAccessKeys permission is available.",
+      "cis_control_id": "CIS-1.4"
+    },
+    "unable_validate_iam_list": {
+      "issue": "Unable to list IAM resources.",
+      "severity": "Low",
+      "recommendation": "Ensure scanner has IAM list permissions.",
+      "cis_control_id": "CIS-1.0"
+    },
+    "ec2_sg_open_critical_ports": {
+      "issue": "EC2 security group exposes critical ports to the internet.",
+      "severity": "High",
+      "recommendation": "Restrict inbound rules on 22, 3389, 80, and 443 from 0.0.0.0/0.",
+      "cis_control_id": "CIS-5.2"
+    },
+    "unable_validate_ec2_sg": {
+      "issue": "Unable to validate EC2 security group rules.",
+      "severity": "Low",
+      "recommendation": "Ensure ec2:DescribeSecurityGroups permission is granted.",
+      "cis_control_id": "CIS-5.2"
+    },
+    "unable_validate_ec2_list": {
+      "issue": "Unable to list EC2 instances.",
+      "severity": "Low",
+      "recommendation": "Ensure ec2:DescribeInstances permission is granted.",
+      "cis_control_id": "CIS-5.0"
+    },
+    "cloudtrail_not_enabled": {
+      "issue": "CloudTrail is not enabled.",
+      "severity": "Critical",
+      "recommendation": "Create at least one multi-region trail and enable logging.",
+      "cis_control_id": "CIS-2.1"
+    },
+    "cloudtrail_logging_disabled": {
+      "issue": "CloudTrail logging is disabled.",
+      "severity": "High",
+      "recommendation": "Enable logging for the CloudTrail trail.",
+      "cis_control_id": "CIS-2.1"
+    },
+    "unable_validate_cloudtrail_status": {
+      "issue": "Unable to validate CloudTrail logging status.",
+      "severity": "Low",
+      "recommendation": "Ensure cloudtrail:GetTrailStatus permission is granted.",
+      "cis_control_id": "CIS-2.1"
+    },
+    "unable_validate_cloudtrail_list": {
+      "issue": "Unable to list CloudTrail trails.",
+      "severity": "Low",
+      "recommendation": "Ensure cloudtrail:DescribeTrails permission is granted.",
+      "cis_control_id": "CIS-2.0"
+    },
+    "unable_validate_ec2_advanced_list": {
+      "issue": "Unable to list EC2 instances for advanced checks.",
+      "severity": "Low",
+      "recommendation": "Ensure ec2:DescribeInstances permission is granted.",
+      "cis_control_id": "CIS-5.0"
+    },
+    "ec2_no_iam_instance_profile": {
+      "issue": "EC2 instance has no IAM instance profile attached.",
+      "severity": "Medium",
+      "recommendation": "Attach an instance profile with least-privilege IAM role for workloads that need AWS API access.",
+      "cis_control_id": "CIS-5.3"
+    },
+    "ec2_sg_all_protocols_public": {
+      "issue": "EC2 security group allows all protocols from the internet.",
+      "severity": "Critical",
+      "recommendation": "Restrict inbound rules; avoid 0.0.0.0/0 with all protocols (-1).",
+      "cis_control_id": "CIS-5.2"
+    },
+    "ec2_sg_nonstandard_ports_public": {
+      "issue": "EC2 security group exposes non-standard TCP ports to the internet.",
+      "severity": "High",
+      "recommendation": "Restrict public ingress to required ports only; use VPN or private connectivity.",
+      "cis_control_id": "CIS-5.2"
+    },
+    "unable_validate_ec2_advanced_sg": {
+      "issue": "Unable to validate EC2 security groups (advanced).",
+      "severity": "Low",
+      "recommendation": "Ensure ec2:DescribeSecurityGroups permission is granted.",
+      "cis_control_id": "CIS-5.2"
+    },
+    "ec2_ebs_unencrypted": {
+      "issue": "EBS volume is not encrypted.",
+      "severity": "High",
+      "recommendation": "Enable encryption by default for new volumes; migrate sensitive data to encrypted volumes.",
+      "cis_control_id": "CIS-5.4"
+    },
+    "unable_validate_ec2_volumes": {
+      "issue": "Unable to list EBS volumes for encryption check.",
+      "severity": "Low",
+      "recommendation": "Ensure ec2:DescribeVolumes permission is granted.",
+      "cis_control_id": "CIS-5.4"
+    },
+    "unable_validate_cloudtrail_advanced_list": {
+      "issue": "Unable to list CloudTrail trails for advanced checks.",
+      "severity": "Low",
+      "recommendation": "Ensure cloudtrail:DescribeTrails permission is granted.",
+      "cis_control_id": "CIS-2.0"
+    },
+    "cloudtrail_advanced_no_trails": {
+      "issue": "No CloudTrail trails exist for advanced configuration checks.",
+      "severity": "Critical",
+      "recommendation": "Create an organization or account trail with logging enabled.",
+      "cis_control_id": "CIS-2.1"
+    },
+    "cloudtrail_not_multi_region": {
+      "issue": "No multi-region CloudTrail trail is configured.",
+      "severity": "High",
+      "recommendation": "Enable IsMultiRegionTrail for at least one trail to capture activity in all regions.",
+      "cis_control_id": "CIS-2.1"
+    },
+    "cloudtrail_no_cloudwatch_logs": {
+      "issue": "CloudTrail trail is not integrated with CloudWatch Logs.",
+      "severity": "Medium",
+      "recommendation": "Configure CloudWatch Logs log group delivery for real-time monitoring and alarms.",
+      "cis_control_id": "CIS-2.2"
+    },
+    "cloudtrail_missing_s3_bucket": {
+      "issue": "CloudTrail trail has no S3 bucket configured.",
+      "severity": "High",
+      "recommendation": "Associate a dedicated S3 bucket with appropriate bucket policy for log delivery.",
+      "cis_control_id": "CIS-2.1"
+    },
+    "cloudtrail_s3_bucket_no_access_logging": {
+      "issue": "S3 bucket used by CloudTrail has server access logging disabled.",
+      "severity": "Medium",
+      "recommendation": "Enable server access logging on the log bucket to an isolated logging bucket.",
+      "cis_control_id": "CIS-2.3"
+    },
+    "unable_validate_cloudtrail_s3_logging": {
+      "issue": "Unable to validate S3 access logging for CloudTrail bucket.",
+      "severity": "Low",
+      "recommendation": "Verify s3:GetBucketLogging and bucket location permissions for the scanner.",
+      "cis_control_id": "CIS-2.3"
+    },
+    "trivy_cli_missing": {
+      "issue": "Trivy CLI not found in PATH.",
+      "severity": "Low",
+      "recommendation": "Install Trivy or set TRIVY_BINARY to the executable path.",
+      "cis_control_id": "CIS-7.0"
+    },
+    "trivy_scan_timeout": {
+      "issue": "Trivy scan timed out.",
+      "severity": "Low",
+      "recommendation": "Retry with a narrower target or increase scanner timeout.",
+      "cis_control_id": "CIS-7.0"
+    },
+    "trivy_scan_failed": {
+      "issue": "Trivy scan failed.",
+      "severity": "Low",
+      "recommendation": "Review Trivy stderr/stdout and target configuration.",
+      "cis_control_id": "CIS-7.0"
+    },
+    "trivy_json_parse_error": {
+      "issue": "Could not parse Trivy JSON output.",
+      "severity": "Low",
+      "recommendation": "Ensure Trivy version supports --format json.",
+      "cis_control_id": "CIS-7.0"
+    },
+    "trivy_vulnerability_critical": {
+      "issue": "Trivy reported a critical container or dependency vulnerability.",
+      "severity": "Critical",
+      "recommendation": "Upgrade affected packages or rebuild images from patched base images.",
+      "cis_control_id": "CIS-7.1"
+    },
+    "trivy_vulnerability_high": {
+      "issue": "Trivy reported a high-severity vulnerability.",
+      "severity": "High",
+      "recommendation": "Patch dependencies or replace vulnerable components.",
+      "cis_control_id": "CIS-7.1"
+    },
+    "trivy_vulnerability_medium": {
+      "issue": "Trivy reported a medium-severity vulnerability.",
+      "severity": "Medium",
+      "recommendation": "Plan remediation per risk tolerance.",
+      "cis_control_id": "CIS-7.1"
+    },
+    "trivy_vulnerability_low": {
+      "issue": "Trivy reported a low-severity vulnerability.",
+      "severity": "Low",
+      "recommendation": "Track and remediate as part of standard patching.",
+      "cis_control_id": "CIS-7.1"
+    },
+    "trivy_vulnerability_unknown": {
+      "issue": "Trivy reported a vulnerability with unknown severity.",
+      "severity": "Medium",
+      "recommendation": "Review Trivy output manually and prioritize by CVE context.",
+      "cis_control_id": "CIS-7.1"
+    },
+    "trivy_no_vulnerabilities_reported": {
+      "issue": "Trivy reported no vulnerabilities for this target.",
+      "severity": "Low",
+      "recommendation": "Continue periodic scanning; confirm target scope is correct.",
+      "cis_control_id": "CIS-7.1"
+    },
+    "stratus_json_unexpected_shape": {
+      "issue": "Stratus results JSON has an unexpected structure.",
+      "severity": "Low",
+      "recommendation": "Provide a list or object with techniques/results per integration docs.",
+      "cis_control_id": "CIS-8.0"
+    },
+    "stratus_technique_executed": {
+      "issue": "Stratus Red Team technique executed or succeeded in results file.",
+      "severity": "High",
+      "recommendation": "Review blast radius and remediate detections in production accounts.",
+      "cis_control_id": "CIS-8.1"
+    },
+    "stratus_technique_recorded": {
+      "issue": "Stratus Red Team technique recorded in results file.",
+      "severity": "Medium",
+      "recommendation": "Validate whether the activity was authorized and update detection coverage.",
+      "cis_control_id": "CIS-8.1"
+    },
+    "stratus_results_file_missing": {
+      "issue": "Stratus results JSON path does not exist.",
+      "severity": "Low",
+      "recommendation": "Pass a valid --stratus-results-json path or STRATUS_RESULTS_JSON env var.",
+      "cis_control_id": "CIS-8.0"
+    },
+    "stratus_results_read_error": {
+      "issue": "Could not read Stratus results JSON.",
+      "severity": "Low",
+      "recommendation": "Verify file permissions and JSON encoding.",
+      "cis_control_id": "CIS-8.0"
+    },
+    "stratus_results_empty": {
+      "issue": "Stratus results file contained no technique entries.",
+      "severity": "Low",
+      "recommendation": "Export results from Stratus after running approved scenarios.",
+      "cis_control_id": "CIS-8.0"
+    },
+    "stratus_cli_error": {
+      "issue": "Stratus CLI list command failed or timed out.",
+      "severity": "Low",
+      "recommendation": "Verify Stratus installation and non-interactive usage from PATH.",
+      "cis_control_id": "CIS-8.0"
+    },
+    "stratus_cli_available": {
+      "issue": "Stratus CLI detected on host.",
+      "severity": "Low",
+      "recommendation": "Run only approved simulations in isolated environments; export JSON for this scanner.",
+      "cis_control_id": "CIS-8.0"
+    },
+    "stratus_not_configured": {
+      "issue": "Stratus CLI not found and no results JSON provided.",
+      "severity": "Low",
+      "recommendation": "Install Stratus Red Team or supply --stratus-results-json.",
+      "cis_control_id": "CIS-8.0"
+    },
+    "pacu_json_unexpected_shape": {
+      "issue": "Pacu results JSON has an unexpected structure.",
+      "severity": "Low",
+      "recommendation": "Export findings as a list of objects with module/details fields.",
+      "cis_control_id": "CIS-1.0"
+    },
+    "pacu_finding_high": {
+      "issue": "Pacu reported a high-severity finding.",
+      "severity": "High",
+      "recommendation": "Review IAM and service configurations; reduce excess permissions.",
+      "cis_control_id": "CIS-1.1"
+    },
+    "pacu_finding_recorded": {
+      "issue": "Pacu module result recorded.",
+      "severity": "Medium",
+      "recommendation": "Triage Pacu output in a controlled environment only.",
+      "cis_control_id": "CIS-1.1"
+    },
+    "pacu_results_file_missing": {
+      "issue": "Pacu results JSON path does not exist.",
+      "severity": "Low",
+      "recommendation": "Pass --pacu-results-json or PACU_RESULTS_JSON.",
+      "cis_control_id": "CIS-1.0"
+    },
+    "pacu_results_read_error": {
+      "issue": "Could not read Pacu results JSON.",
+      "severity": "Low",
+      "recommendation": "Verify export format and file permissions.",
+      "cis_control_id": "CIS-1.0"
+    },
+    "pacu_results_empty": {
+      "issue": "Pacu results file contained no module entries.",
+      "severity": "Low",
+      "recommendation": "Run Pacu in an authorized lab and export structured results.",
+      "cis_control_id": "CIS-1.0"
+    },
+    "pacu_cli_hint": {
+      "issue": "Pacu CLI detected; interactive scans are not executed automatically.",
+      "severity": "Low",
+      "recommendation": "Export JSON findings and pass --pacu-results-json for standardized reporting.",
+      "cis_control_id": "CIS-1.0"
+    },
+    "pacu_not_configured": {
+      "issue": "Pacu not found and no results JSON provided.",
+      "severity": "Low",
+      "recommendation": "Install Pacu in a sandbox or provide exported JSON results.",
+      "cis_control_id": "CIS-1.0"
+    }
+  }
+}
+

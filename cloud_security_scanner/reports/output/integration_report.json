@@ -1,0 +1,60 @@
+{
+  "summary": {
+    "Critical": 0,
+    "High": 0,
+    "Medium": 0,
+    "Low": 4
+  },
+  "service_summary": {
+    "CloudTrail": 1,
+    "EC2": 1,
+    "IAM": 1,
+    "S3": 1
+  },
+  "recommendations": [
+    "Ensure cloudtrail:DescribeTrails permission is granted.",
+    "Ensure ec2:DescribeInstances permission is granted.",
+    "Ensure scanner has IAM list permissions.",
+    "Verify s3:ListAllMyBuckets permission for scanner identity."
+  ],
+  "cis_controls": [
+    "CIS-1.0",
+    "CIS-2.0",
+    "CIS-3.0",
+    "CIS-5.0"
+  ],
+  "findings": [
+    {
+      "service": "CloudTrail",
+      "resource_id": "account",
+      "issue": "Unable to list CloudTrail trails.",
+      "severity": "Low",
+      "recommendation": "Ensure cloudtrail:DescribeTrails permission is granted.",
+      "cis_control_id": "CIS-2.0"
+    },
+    {
+      "service": "EC2",
+      "resource_id": "account",
+      "issue": "Unable to list EC2 instances.",
+      "severity": "Low",
+      "recommendation": "Ensure ec2:DescribeInstances permission is granted.",
+      "cis_control_id": "CIS-5.0"
+    },
+    {
+      "service": "IAM",
+      "resource_id": "account",
+      "issue": "Unable to list IAM resources.",
+      "severity": "Low",
+      "recommendation": "Ensure scanner has IAM list permissions.",
+      "cis_control_id": "CIS-1.0"
+    },
+    {
+      "service": "S3",
+      "resource_id": "account",
+      "issue": "Unable to list S3 buckets.",
+      "severity": "Low",
+      "recommendation": "Verify s3:ListAllMyBuckets permission for scanner identity.",
+      "cis_control_id": "CIS-3.0"
+    }
+  ]
+}

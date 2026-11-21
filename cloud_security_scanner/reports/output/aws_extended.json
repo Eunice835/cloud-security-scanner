@@ -1,0 +1,47 @@
+{
+  "summary": {
+    "Critical": 2,
+    "High": 1,
+    "Medium": 0,
+    "Low": 0
+  },
+  "service_summary": {
+    "CloudTrail": 2,
+    "IAM": 1
+  },
+  "recommendations": [
+    "Apply least privilege and remove wildcard action/resource permissions.",
+    "Create an organization or account trail with logging enabled.",
+    "Create at least one multi-region trail and enable logging."
+  ],
+  "cis_controls": [
+    "CIS-1.1",
+    "CIS-2.1"
+  ],
+  "findings": [
+    {
+      "service": "CloudTrail",
+      "resource_id": "account",
+      "issue": "CloudTrail is not enabled.",
+      "severity": "Critical",
+      "recommendation": "Create at least one multi-region trail and enable logging.",
+      "cis_control_id": "CIS-2.1"
+    },
+    {
+      "service": "CloudTrail",
+      "resource_id": "account",
+      "issue": "No CloudTrail trails exist for advanced configuration checks.",
+      "severity": "Critical",
+      "recommendation": "Create an organization or account trail with logging enabled.",
+      "cis_control_id": "CIS-2.1"
+    },
+    {
+      "service": "IAM",
+      "resource_id": "scanner-user",
+      "issue": "IAM principal has over-permissive policy.",
+      "severity": "High",
+      "recommendation": "Apply least privilege and remove wildcard action/resource permissions.",
+      "cis_control_id": "CIS-1.1"
+    }
+  ]
+}

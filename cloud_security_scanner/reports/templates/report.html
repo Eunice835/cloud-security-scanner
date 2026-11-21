@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cloud Security Posture Report</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 24px; }
+    h1, h2 { color: #1f2937; }
+    table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+    th, td { border: 1px solid #d1d5db; padding: 8px; text-align: left; }
+    th { background-color: #f3f4f6; }
+    .table-wrap { max-height: 700px; overflow: auto; border: 1px solid #d1d5db; margin-bottom: 20px; }
+    .table-wrap table { margin-bottom: 0; border: 0; }
+    .table-wrap thead th { position: sticky; top: 0; z-index: 2; }
+    td { word-break: break-word; }
+    .meta { color: #374151; margin-bottom: 10px; }
+    .warning { color: #92400e; font-weight: bold; }
+    .Critical { color: #991b1b; font-weight: bold; }
+    .High { color: #b45309; font-weight: bold; }
+    .Medium { color: #1d4ed8; font-weight: bold; }
+    .Low { color: #374151; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h1>Cloud Security Posture Report</h1>
+
+  <h2>Summary by Severity</h2>
+  <table>
+    <tr><th>Severity</th><th>Count</th></tr>
+    {% for severity, count in summary.items() %}
+    <tr>
+      <td class="{{ severity }}">{{ severity }}</td>
+      <td>{{ count }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+
+  <h2>Summary by Service</h2>
+  <table>
+    <tr><th>Service</th><th>Count</th></tr>
+    {% for service, count in service_summary.items() %}
+    <tr>
+      <td>{{ service }}</td>
+      <td>{{ count }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+
+  <h2>Findings</h2>
+  <p class="meta">Displaying {{ displayed_findings_count }} of {{ total_findings }} findings in HTML.</p>
+  {% if truncated_count > 0 %}
+  <p class="warning">Large result set detected: {{ truncated_count }} findings are omitted from HTML for performance. Full data is available in the JSON report.</p>
+  {% endif %}
+  <div class="table-wrap">
+  <table>
+    <tr>
+      <th>Service</th>
+      <th>Resource ID</th>
+      <th>Issue</th>
+      <th>Severity</th>
+      <th>Recommendation</th>
+      <th>CIS Control ID</th>
+    </tr>
+    {% for finding in findings %}
+    <tr>
+      <td>{{ finding.service }}</td>
+      <td>{{ finding.resource_id }}</td>
+      <td>{{ finding.issue }}</td>
+      <td class="{{ finding.severity }}">{{ finding.severity }}</td>
+      <td>{{ finding.recommendation }}</td>
+      <td>{{ finding.cis_control_id }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+  </div>
+
+  <h2>Recommendations</h2>
+  <ul>
+    {% for rec in recommendations %}
+    <li>{{ rec }}</li>
+    {% endfor %}
+  </ul>
+
+  <h2>CIS Controls Covered</h2>
+  <ul>
+    {% for control in cis_controls %}
+    <li>{{ control }}</li>
+    {% endfor %}
+  </ul>
+</body>
+</html>
+
